@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Dude - Certificate Verification</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            darkBg: '#090a0d',
+            cardBg: '#0f1117',
+            neonGreen: '#23e843',
+            linkBlue: '#2b7fff',
+            textGray: '#8f9cae',
+          },
+          boxShadow: {
+            'glow-green': '0 0 35px -5px rgba(35, 232, 67, 0.45), 0 0 10px 0px rgba(35, 232, 67, 0.25)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #090a0d;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Outer glow and border matching the exact screenshot visual */
+    .glow-card {
+      background: #0d0f15;
+      border: 1.5px solid #1be341;
+      box-shadow: 0 0 30px rgba(30, 220, 60, 0.32), inset 0 0 15px rgba(30, 220, 60, 0.05);
+    }
+
+    /* Verified badge circular glow */
+    .badge-icon {
+      filter: drop-shadow(0 0 10px rgba(35, 232, 67, 0.5));
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #090a0d;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e2230;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-neonGreen selection:text-black">
+
+  <!-- ================= TOP NAVIGATION ================= -->
+  <header class="w-full border-b border-gray-900/60 bg-[#090a0d]/90 backdrop-blur-md sticky top-0 z-50 px-4 sm:px-8 py-3.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      
+      <!-- Logo & Brand Name -->
+      <a href="#" class="flex items-center gap-2.5 group">
+        <!-- SVG Avatar: Dude with sunglasses & beanie -->
+        <svg class="w-8 h-8 text-white transition-transform duration-200 group-hover:scale-105" viewBox="0 0 64 64" fill="currentColor">
+          <!-- Hat / Beanie -->
+          <path d="M18 20 C18 10, 46 10, 46 20 C48 20, 50 21, 50 24 C50 27, 14 27, 14 24 C14 21, 16 20, 18 20 Z" fill="#ffffff"/>
+          <path d="M14 25 H50 V28 H14 Z" fill="#e2e8f0"/>
+          <!-- Head / Face -->
+          <path d="M19 28 C19 28, 18 44, 32 44 C46 44, 45 28, 45 28 Z" fill="#ffffff"/>
+          <!-- Cool Sunglasses -->
+          <path d="M21 31 H29 V37 H21 Z" fill="#090a0d"/>
+          <path d="M35 31 H43 V37 H35 Z" fill="#090a0d"/>
+          <rect x="29" y="32" width="6" height="2.5" fill="#090a0d"/>
+          <!-- Smile -->
+          <path d="M27 40 Q32 43 37 40" stroke="#090a0d" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <!-- Shoulders / Neck -->
+          <path d="M25 44 H39 V48 H25 Z" fill="#ffffff"/>
+          <path d="M14 56 C14 48, 50 48, 50 56 Z" fill="#ffffff"/>
+        </svg>
+        <span class="text-white text-lg sm:text-xl font-bold tracking-tight">Digital dude</span>
+      </a>
+
+      <!-- Right Action / Mobile Menu Toggle -->
+      <button id="menu-btn" aria-label="Toggle navigation" class="p-2 text-[#2b7fff] hover:text-blue-400 focus:outline-none transition-colors">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <line x1="4" y1="7" x2="20" y2="7" stroke-linecap="round"/>
+          <line x1="8" y1="12" x2="20" y2="12" stroke-linecap="round"/>
+          <line x1="5" y1="17" x2="20" y2="17" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+    </div>
+  </header>
+
+  <!-- ================= MAIN CONTENT (VERIFICATION CARD) ================= -->
+  <main class="flex-1 flex items-center justify-center px-4 sm:px-6 py-10 sm:py-16">
+    <div class="w-full max-w-4xl glow-card rounded-2xl p-6 sm:p-10 md:p-12 relative overflow-hidden backdrop-blur-sm">
+      
+      <!-- Top Header: Badge & "Certificate Verified!" -->
+      <div class="flex items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-12">
+        <!-- Floating decorative geometric check badge -->
+        <div class="relative flex items-center justify-center">
+          <!-- Background decorative shapes matching screenshot -->
+          <div class="absolute -top-1 -right-2 w-3 h-3 bg-zinc-600/70 rounded-full blur-[0.5px]"></div>
+          <div class="absolute -bottom-2 -left-2 w-4 h-2 bg-zinc-600/80 rounded-full transform -rotate-45"></div>
+          <div class="absolute top-1 -left-3 w-5 h-2 bg-zinc-600/60 rounded-full transform rotate-12"></div>
+          <div class="absolute -bottom-1 right-3 w-4 h-1.5 bg-zinc-600/70 rounded-full"></div>
+
+          <!-- Main circular green check badge -->
+          <div class="w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-neonGreen flex items-center justify-center shadow-lg badge-icon z-10">
+            <svg class="w-6 h-6 sm:w-7 sm:h-7 text-[#090a0d] stroke-[3.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Heading Text -->
+        <h1 class="text-neonGreen text-2xl sm:text-4xl font-extrabold tracking-tight">
+          Certificate Verified!
+        </h1>
+      </div>
+
+      <!-- Credential Information Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-y-5 sm:gap-y-6 gap-x-8 sm:gap-x-12 text-sm sm:text-base leading-relaxed">
+        
+        <!-- Row 1: Name & Intern Role -->
+        <div>
+          <span class="font-bold text-white">Name:</span>
+          <span class="text-zinc-200 ml-1.5 font-medium">DHARMARAJ S</span>
+        </div>
+        <div>
+          <span class="font-bold text-white">Intern Role:</span>
+          <span class="text-zinc-200 ml-1.5 font-medium">Graphic Design</span>
+        </div>
+
+        <!-- Row 2: College Name & Course -->
+        <div>
+          <span class="font-bold text-white">College Name:</span>
+          <span class="text-zinc-200 ml-1.5 font-normal">Annamalai University Faculty of Engineering and Technology, Chidambaram, Cuddalore - 608002</span>
+        </div>
+        <div>
+          <span class="font-bold text-white">Course:</span>
+          <span class="text-zinc-200 ml-1.5 font-normal">Engineering</span>
+        </div>
+
+        <!-- Row 3: Department & Year of Study -->
+        <div>
+          <span class="font-bold text-white">Department:</span>
+          <span class="text-zinc-200 ml-1.5 font-normal">Computer science and engineering</span>
+        </div>
+        <div>
+          <span class="font-bold text-white">Year of Study:</span>
+          <span class="text-zinc-200 ml-1.5 font-normal">4th year</span>
+        </div>
+
+        <!-- Row 4: Phone Number & Mail ID -->
+        <div>
+          <span class="font-bold text-white">Phone Number:</span>
+          <a href="tel:+919790112839" class="text-zinc-200 ml-1.5 hover:text-neonGreen transition-colors">+91 6380799081</a>
+        </div>
+        <div class="break-words">
+          <span class="font-bold text-white">Mail ID:</span>
+          <a href="mailto:mukeshmukesh1750@gmail.com" class="text-zinc-200 ml-1.5 hover:text-neonGreen transition-colors">dharmadrs4191@gmail.com</a>
+        </div>
+
+        <!-- Row 5: Intern Duration & Certificate ID -->
+        <div>
+          <span class="font-bold text-white">Intern Duration:</span>
+          <span class="text-zinc-200 ml-1.5">01-06-2026 to 30-06-2026</span>
+        </div>
+        <div>
+          <span class="font-bold text-white">Certificate ID:</span>
+          <span class="text-zinc-200 ml-1.5 font-mono tracking-wide">DD-INTERN-AU-2026-006</span>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ================= FOOTER SECTION ================= -->
+  <footer class="w-full bg-[#07080b] pt-14 pb-8 border-t border-zinc-900/80 text-zinc-300">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12">
+        
+        <!-- Column 1: Brand & Bio -->
+        <div class="space-y-4">
+          <div class="flex items-center gap-3">
+            <!-- Digital Dude Icon -->
+            <svg class="w-10 h-10 text-white" viewBox="0 0 64 64" fill="currentColor">
+              <path d="M18 20 C18 10, 46 10, 46 20 C48 20, 50 21, 50 24 C50 27, 14 27, 14 24 C14 21, 16 20, 18 20 Z" fill="#ffffff"/>
+              <path d="M14 25 H50 V28 H14 Z" fill="#e2e8f0"/>
+              <path d="M19 28 C19 28, 18 44, 32 44 C46 44, 45 28, 45 28 Z" fill="#ffffff"/>
+              <path d="M21 31 H29 V37 H21 Z" fill="#090a0d"/>
+              <path d="M35 31 H43 V37 H35 Z" fill="#090a0d"/>
+              <rect x="29" y="32" width="6" height="2.5" fill="#090a0d"/>
+              <path d="M27 40 Q32 43 37 40" stroke="#090a0d" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M25 44 H39 V48 H25 Z" fill="#ffffff"/>
+              <path d="M14 56 C14 48, 50 48, 50 56 Z" fill="#ffffff"/>
+            </svg>
+            <span class="text-white text-2xl font-bold tracking-tight">Digital dude</span>
+          </div>
+
+          <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed pr-2">
+            Your Trusted Digital Partner Digital Dude offers comprehensive digital services tailored for you to elevate your brand and achieve exceptional growth.
+          </p>
+
+          <!-- Social Icons -->
+          <div class="flex items-center gap-4 pt-1">
+            <a href="#" aria-label="Instagram" class="text-linkBlue hover:text-blue-400 text-lg transition-colors">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="#" aria-label="Facebook" class="text-linkBlue hover:text-blue-400 text-lg transition-colors">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="#" aria-label="LinkedIn" class="text-linkBlue hover:text-blue-400 text-lg transition-colors">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div>
+          <h3 class="text-linkBlue font-bold text-base sm:text-lg mb-4 tracking-wide">Quick Links</h3>
+          <ul class="space-y-2.5 text-xs sm:text-sm font-medium text-zinc-300">
+            <li><a href="#" class="hover:text-white transition-colors">Home</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Services</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Portfolio</a></li>
+            <li><a href="#" class="text-white hover:text-neonGreen transition-colors">Certificate Validator</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Policy Pages -->
+        <div>
+          <h3 class="text-linkBlue font-bold text-base sm:text-lg mb-4 tracking-wide">Policy Pages</h3>
+          <ul class="space-y-2.5 text-xs sm:text-sm font-medium text-zinc-300">
+            <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Terms & Conditions</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Return & Refund Policy</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Pricing Details</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Contact Us -->
+        <div>
+          <h3 class="text-linkBlue font-bold text-base sm:text-lg mb-4 tracking-wide">Contact Us</h3>
+          <div class="space-y-3 text-xs sm:text-sm text-zinc-300">
+            
+            <p class="leading-relaxed">
+              <span class="font-semibold text-white">Address:</span> No.90, Ramanujakoodam Street, Poonamallee, Chennai- 600056
+            </p>
+
+            <div class="flex items-center gap-2 pt-1 text-zinc-400">
+              <i class="fa-regular fa-clock text-xs text-zinc-300"></i>
+              <span>Mon to Sat, 09:00 - 20:00</span>
+            </div>
+
+            <div class="flex items-center gap-2 text-zinc-400">
+              <i class="fa-regular fa-envelope text-xs text-zinc-300"></i>
+              <a href="mailto:wedigitaldude@gmail.com" class="hover:text-white transition-colors">wedigitaldude@gmail.com</a>
+            </div>
+
+            <div class="flex items-center gap-2 text-zinc-400">
+              <i class="fa-regular fa-envelope text-xs text-zinc-300"></i>
+              <a href="mailto:lalith@digital-dude.com" class="hover:text-white transition-colors">lalith@digital-dude.com</a>
+            </div>
+
+            <div class="flex items-center gap-2 text-zinc-400">
+              <i class="fa-solid fa-phone text-xs text-zinc-300"></i>
+              <a href="tel:+919787097006" class="hover:text-white transition-colors">+919787097006</a>
+            </div>
+
+            <div class="flex items-center gap-2 text-zinc-400">
+              <i class="fa-solid fa-phone text-xs text-zinc-300"></i>
+              <a href="tel:+918939651525" class="hover:text-white transition-colors">+918939651525</a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Copyright Sub-Footer -->
+      <div class="pt-8 border-t border-zinc-900/90 text-center">
+        <p class="text-xs text-zinc-500 font-semibold uppercase tracking-wider">
+          COPYRIGHT &copy; 2025 DIGITAL DUDE | ALL RIGHTS RESERVED
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Optional Toast / Copy Notification handler -->
+  <script>
+    // Smooth interaction for hamburger click
+    const menuBtn = document.getElementById('menu-btn');
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        // Toggle effect or interaction feedback
+        menuBtn.classList.toggle('opacity-70');
+      });
+    }
+  </script>
+</body>
+</html>
